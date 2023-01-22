@@ -29,7 +29,7 @@ async def get_usage(message: types.Message):
     await bot.send_message(message.from_user.id, text=usage_string)
 
 
-@dispatcher.message_handler(commands=["nvidia-smi"])
+@dispatcher.message_handler(commands=["nvidia_smi"])
 async def get_nvidia_smi_output(message: types.Message):
     nvidia_smi_output = check_output(["nvidia-smi"])
     await bot.send_message(message.from_user.id, text=nvidia_smi_output)

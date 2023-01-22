@@ -1,5 +1,6 @@
 import os
 from typing import List, Tuple
+from subprocess import check_output
 
 import nvgpu
 from aiogram import Bot, Dispatcher, executor, types
@@ -27,6 +28,11 @@ async def get_usage(message: types.Message):
     usage_string = get_mem_usage_string()
     await bot.send_message(message.from_user.id, text=usage_string)
 
+
+@dispatcher.message_handler(commands=["nvidia-smi"])
+async def get_nvidia_smi_output(message: types.Message):
+    nvidia_smi_output = subprocess.check_output(["nvidia-smi"])
+    await bot.send_message(message.from_user.id, text=nvidia_smi_output)
 
 if __name__ == "__main__":
     executor.start_polling(dispatcher, skip_updates=False)

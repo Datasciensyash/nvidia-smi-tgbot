@@ -31,7 +31,7 @@ async def get_usage(message: types.Message):
 
 @dispatcher.message_handler(commands=["nvidia-smi"])
 async def get_nvidia_smi_output(message: types.Message):
-    nvidia_smi_output = subprocess.check_output(["nvidia-smi"])
+    nvidia_smi_output = check_output(["nvidia-smi"])
     await bot.send_message(message.from_user.id, text=nvidia_smi_output)
 
 if __name__ == "__main__":
